@@ -15341,7 +15341,8 @@ table.tablesorter thead tr .headerSortDown {
 }
 
 .main-panel>.content {
-  padding: 78px 30px 30px 280px;
+  /* padding: 78px 30px 30px 280px; */
+  padding: 78px 30px 30px 78px;
   min-height: calc(100vh - 70px);
 }
 

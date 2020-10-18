@@ -1,0 +1,9 @@
+.brand-style {
+    color: #fcaf58;
+    font-weight: bolder;
+    letter-spacing: 1px;
+
+    background: linear-gradient(to right, #fcaf58 0%, #d81e5b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

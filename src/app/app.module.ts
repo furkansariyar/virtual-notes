@@ -13,6 +13,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
+import { MatCardModule } from "@angular/material/card";
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   imports: [
@@ -23,6 +26,7 @@ import { ComponentsModule } from "./components/components.module";
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    MatCardModule, MatButtonModule,
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],

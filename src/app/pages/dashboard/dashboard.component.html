@@ -1,4 +1,134 @@
+<div class="content" style="padding-left: 30px;">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-chart">
+        <div class="card-header">
+          <div class="row justify-content-between">
+            <div class=" col-xs-9 text-left" style="padding-left: 15px;">
+              <h2 class=" card-title">My Notes</h2>
+            </div>
+            <div class=" col-xs-3" style="padding-right: 15px;">
+              <div style="float: right">
+                <ul style="display: inline-flex;" >
+                  <li class=" search-bar input-group">
+                    <button
+                      class=" btn btn-link"
+                      data-target="#searchModal"
+                      data-toggle="modal"
+                      (click)="open(content)"
+                      id="search-button"
+                    >
+                      <i class=" tim-icons icon-zoom-split"> </i>
+                      <!-- <span class=" d-lg-none d-md-block"> Search </span> -->
+                    </button>
+                  </li>
+                  <li class=" search-bar input-group" style="margin-left: 0;">
+                    <button
+                      class=" btn btn-link"
+                      data-target="#searchModal"
+                      data-toggle="modal"
+                      (click)="open(content)"
+                      id="search-button"
+                    >
+                      <i class=" tim-icons icon-simple-add"> </i>
+                      <!-- <span class=" d-lg-none d-md-block"> Create Note </span> -->
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
 
+        <div class="card-body" style="padding: 0 15px 15px;">
+          <div class="card" style="background: #fcaf58; margin-bottom: 10px;">
+            <div class="card-header">
+              <div class="row justify-content-between">
+                <div class=" col-xs-9 text-left" style="padding-left: 15px;">
+                  <h4 class=" card-title" style="color: #27293d; font-weight: bolder">
+                    Topic
+                  </h4>
+                </div>
+                <div class=" col-xs-3">
+                  <button
+                    class=" btn btn-link"
+                    data-target="#searchModal"
+                    data-toggle="modal"
+                    (click)="open(content)"
+                    id="search-button"
+                    style="font-size: larger; margin-top: -8px; margin-right: 5px"
+                  >
+                    <i class=" tim-icons icon-pencil"> </i>
+                  </button>
+                </div>
+              
+              </div>
+            </div>
+            <div class="card-body" style="padding: 0 15px;">
+              <h4 style="color: #27293d">Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum</h4>
+            </div>
+          </div>
+
+          <div class="card" style="background: #fcaf58; margin-bottom: 10px;">
+            <div class="card-header">
+              <div class="row justify-content-between">
+                <div class=" col-xs-9 text-left" style="padding-left: 15px;">
+                  <h4 class=" card-title" style="color: #27293d; font-weight: bolder">
+                    Topic
+                  </h4>
+                </div>
+                <div class=" col-xs-3">
+                  <button
+                    class=" btn btn-link"
+                    data-target="#searchModal"
+                    data-toggle="modal"
+                    (click)="open(content)"
+                    id="search-button"
+                    style="font-size: larger; margin-top: -8px; margin-right: 5px"
+                  >
+                    <i class=" tim-icons icon-pencil"> </i>
+                  </button>
+                </div>
+              
+              </div>
+            </div>
+            <div class="card-body" style="padding: 0 15px;">
+              <h4 style="color: #27293d">Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum</h4>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class=" modal-header">
+    <input
+      class=" form-control"
+      id="inlineFormInputGroup"
+      placeholder="SEARCH"
+      type="text"
+    />
+
+    <button
+      aria-label="Close"
+      class=" close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
+  </div>
+
+</ng-template>
+
+<!-- 
 <div class=" content">
   <div class=" row">
     <div class=" col-12">
@@ -382,3 +512,4 @@
     </div>
   </div>
 </div>
+ -->

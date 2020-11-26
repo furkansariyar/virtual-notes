@@ -19,12 +19,42 @@ export class DashboardComponent implements OnInit {
 
   closeResult: string;
 
+  notes;
+  topics;
 
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
 
+    this.notes = [
+      {
+        topic: "Topic",
+        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
+      },
+      {
+        topic: "Topic",
+        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
+      },
+      {
+        topic: "Topic",
+        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
+      }
+    ];
 
+    this.topics = [
+      {
+        id: "1",
+        title: "topic 1"
+      },
+      {
+        id: "2",
+        title: "topic 2 topic 2 topic 2 topic 2 topic 2 topic 2 topic 2"
+      },
+      {
+        id: "3",
+        title: "topic 3"
+      }
+    ];
 
 
     

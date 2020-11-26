@@ -1,0 +1,11 @@
+.topic-abbreviation {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.topic-abbreviation:hover {
+    overflow: visible;
+    background: #27293d;
+    width: max-content;
+}

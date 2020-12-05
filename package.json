@@ -73,6 +73,7 @@
     "@angular/platform-browser-dynamic": "9.0.5",
     "@angular/router": "9.0.5",
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
+    "angular2-multiselect-dropdown": "^4.6.3",
     "chart.js": "2.8.0",
     "core-js": "3.6.4",
     "ngx-toastr": "10.0.4",

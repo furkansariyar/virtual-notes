@@ -11,7 +11,7 @@ export class AppComponent {
   topics;
   
   ngOnInit() {
-    // todo: servisten kullanicinin topicleri alinacak + bunu dashboard a gonder
+    /* // todo: servisten kullanicinin topicleri alinacak + bunu dashboard a gonder
     this.topics = [
       {
         id: "1",
@@ -25,7 +25,7 @@ export class AppComponent {
         id: "3",
         title: "topic 3"
       }
-    ];
+    ]; */
   }
 
 }

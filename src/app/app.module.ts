@@ -15,11 +15,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { MatCardModule } from "@angular/material/card";
 import {MatButtonModule} from '@angular/material/button';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
+    AngularMultiSelectModule,
+    MatSelectModule,
     FormsModule,
     HttpClientModule,
     ComponentsModule,

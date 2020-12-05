@@ -1,11 +1,50 @@
-.topic-abbreviation {
+.topic-abbreviation, .abbreviation, .topic-title-abbreviation {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
+    /* text-transform: capitalize; */
 }
 
 .topic-abbreviation:hover {
     overflow: visible;
     background: #27293d;
     width: max-content;
+}
+
+/* .abbreviation:hover {
+    white-space: initial;
+} */
+
+.note-card {
+    background: #fcaf58; 
+    margin-bottom: 15px;
+}
+
+.note-card:hover {
+    transition: all .2s ease-in-out;
+    transform: scale(1.04);
+}
+
+.note-card:hover .abbreviation{
+    transition: all .2s ease-in-out;
+    white-space: initial;
+}
+
+.multiselect {
+    width: 100%;
+}
+
+.btn-dropdown {
+    position: initial !important;
+    right: initial !important;
+    top: initial !important;
+    margin: initial !important;
+}
+
+.btn-dropdown-item {
+    position: initial !important;
+    right: initial !important;
+    top: initial !important;
+    margin: initial !important;
+    color: #1d1d24;
 }

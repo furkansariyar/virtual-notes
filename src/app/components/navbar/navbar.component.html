@@ -30,7 +30,7 @@
             class=" btn btn-link"
             data-target="#searchModal"
             data-toggle="modal"
-            (click)="open(content)"
+            (click)="open(search)"
             id="search-button"
           >
             <i class=" tim-icons icon-zoom-split"> </i>
@@ -114,7 +114,7 @@
   </div>
 </nav>
 
-<ng-template #content let-modal>
+<ng-template #search let-modal>
   <div class=" modal-header">
     <input
       class=" form-control"

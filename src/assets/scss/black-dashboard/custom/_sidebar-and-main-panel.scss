@@ -663,7 +663,7 @@
   .nav-open{
       .main-panel{
           right: 0;
-          @include transform-translate-x(260px);
+          /* @include transform-translate-x(260px); */
       }
 
       .sidebar{

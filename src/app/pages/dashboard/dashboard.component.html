@@ -1,6 +1,6 @@
 <div class="content">
   <div class="row">
-    <div class="sidebar">
+    <div class="sidebar dash-side-collapse">
       <ul class="nav">
         <li class="nav-item">
           <a style="text-transform: none; cursor: initial; padding: 0 8px; font-size: larger;" (click)="filterTopic()">
@@ -58,7 +58,7 @@
       <div class="card-body" style="padding: 0 20px 15px;">
         <div class="row">
           <div class="col-sm-6" *ngFor="let note of showedNotes">
-            <div class="card note-card">
+            <div class="card note-card" (click)="open(displayNote, note)">
               <div class="card-header">
                 <div class="row justify-content-between">
                   <div class=" col-xs-9 text-left" style="padding-left: 15px; width: 80%;">
@@ -178,5 +178,36 @@
       [(ngModel)]="newNoteContent"
     />
     
+  </div>
+</ng-template>
+
+<ng-template #displayNote let-modal>
+  <div class=" modal-header">
+
+    <div style="width: 96%">
+      <div class="displayNote">
+        <span class="title">Topic:&nbsp;</span>
+        <span class="noteTopic">
+          {{viewedNote.topic}}
+        </span>
+      </div>
+  
+      <div class="displayNote">
+        <span class="title">Note:&nbsp;</span>
+        <span class="noteContent">
+          {{viewedNote.content}}
+        </span>
+      </div>
+    </div>
+    
+    <button
+      aria-label="Close"
+      class=" close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('displayNote')"
+    >
+      <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
   </div>
 </ng-template>

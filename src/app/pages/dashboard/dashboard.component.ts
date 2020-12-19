@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   newTopicName: any;
   newNoteContent: any;
   searchedValue: any;
+  viewedNote: any = {};
 
   constructor(private modalService: NgbModal,
     private toastr: ToastrService) {}
@@ -98,7 +99,10 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
-  open(content) {
+  open(content, note) {
+    if (content._declarationTContainer.localNames[0] === "displayNote") {
+      this.viewedNote = note;
+    }
     this.modalService.open(content, {windowClass: 'modal-search'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -114,8 +118,7 @@ export class DashboardComponent implements OnInit {
     } else {
       if (reason == "save-note") {
         this.addNote();
-      }
-      else if (reason == "search") {
+      } else if (reason == "search") {
         this.search();
       }
       return  `with: ${reason}`;

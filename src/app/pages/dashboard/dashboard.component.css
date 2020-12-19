@@ -48,3 +48,24 @@
     margin: initial !important;
     color: #1d1d24;
 }
+
+@media (max-width: 991px) {
+    .dash-side-collapse {
+        padding-top: 40px;
+    }
+}
+
+.displayNote {
+    width: 100%;
+    padding: 10px 0;
+    line-height: 24px;
+}
+
+.displayNote .title {
+    font-weight: bold; 
+    color: #e6322f;
+}
+
+.displayNote .noteTopic, .displayNote .noteContent {
+    color: #1d1d28;
+}

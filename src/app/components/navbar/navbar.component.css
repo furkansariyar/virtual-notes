@@ -7,3 +7,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+@media (max-width: 991px) {
+    .brand-title-collapse {
+        font-size: large;
+        -webkit-text-fill-color: initial;
+        color: #fcaf58;
+    }
+}

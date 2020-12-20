@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: "",
     component: AdminLayoutComponent,
-    /* canActivate: [AuthGuard], */
+    canActivate: [AuthGuard],
     children: [
       {path: "", redirectTo: "dashboard", pathMatch: "full"},
       {path: "", loadChildren: "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"}

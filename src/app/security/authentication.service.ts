@@ -20,8 +20,8 @@ export class AuthenticationService {
 
   register(registerData) {
     return this.http.post<any>( environment.API_BASE_PATH + '/token/register', registerData)
-      .pipe(map(resp => {
-        return resp;
+      .pipe(map(res => {
+        return res;
       }));
   }
 

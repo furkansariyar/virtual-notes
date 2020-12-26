@@ -1,26 +1,26 @@
-.login-form {
-    padding-top: calc(40vh - 150px); 
+.register-form {
+    padding-top: calc(40vh - 227px); 
     width: 50%; 
     height: 100vh;
 }
 
-.register-btn {
+.login-btn {
     float: right;
 }
 
-@media (max-width: 508px) {
-    .register-btn {
+@media (max-width: 518px) {
+    .login-btn {
         float: initial;
         width: 100%;
     }
 
-    .login-btn {
+    .register-btn {
         width: 100%;
     }
 
-    .login-form {
-        padding-top: calc(35vh - 150px);
-    }
+    /* .register-form {
+        padding-top: calc(35vh - 227px);
+    } */
 }
 
 .padding-top-10 {

@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './security/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
   /* {
@@ -34,6 +35,7 @@ const routes: Routes = [
   }, */
 
   {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
   {
     path: "**",
     redirectTo: "dashboard" //todo: not found component eklenecek

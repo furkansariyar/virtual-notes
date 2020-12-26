@@ -22,6 +22,7 @@ import { AuthGuard } from './security/auth.guard';
 import { AuthenticationService } from './security/authentication.service';
 import { ErrorInterceptor } from './security/authentication.interceptor';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { LoginComponent } from './login/login.component';
     MatCardModule, MatButtonModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, RegisterComponent],
   providers: [
     AuthenticationService,
     AuthGuard,

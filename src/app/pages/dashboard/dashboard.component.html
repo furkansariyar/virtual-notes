@@ -13,7 +13,7 @@
         >
         <!-- TODO: SIDEBAR COLLAPSE IKEN BUYUTULURKEN BUG VAR ONU DUZELT -->
           <a style="text-transform: none; cursor: initial; padding: 0 8px; font-size: larger;" (click)="filterTopic(item)">
-            <p class="topic-abbreviation">{{ item.topic }}</p>
+            <p class="topic-abbreviation">{{ item.topic_name }}</p>
           </a>
         </li>
       </ul>
@@ -63,7 +63,7 @@
                 <div class="row justify-content-between">
                   <div class=" col-xs-9 text-left" style="padding-left: 15px; width: 80%;">
                     <h4 class=" card-title topic-title-abbreviation" style="color: #27293d; font-weight: bolder">
-                      {{note.topic}}
+                      {{note.topic.topicName}}
                     </h4>
                   </div>
                   <div class=" col-xs-3">
@@ -82,7 +82,7 @@
                 </div>
               </div>
               <div class="card-body" style="padding: 0 15px;">
-                <h4 class="abbreviation" style="color: #27293d">{{note.content}}</h4>
+                <h4 class="abbreviation" style="color: #27293d">{{note.note}}</h4>
               </div>
             </div>
           </div>

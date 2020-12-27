@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-group padding-top-10">
-        <button [disabled]="loading" type="submit" class="btn btn-primary register-btn">Register</button>
+        <button [disabled]="loading" type="submit" class="btn btn-danger register-btn">Register</button>
         <a [routerLink]="['/login']" class="btn btn-default login-btn">Login</a>
       </div>
       <div *ngIf="error" class="alert alert-danger">{{error}}</div>

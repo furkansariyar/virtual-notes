@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { HttpManager } from "src/app/HttpManager";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-dashboard",
@@ -21,7 +23,7 @@ export class DashboardComponent implements OnInit {
   closeResult: string;
 
   notes:any = [];
-  topics:any;
+  topics:any =[];
   showedNotes:any = [];
   addTopicFlag = false;
   selectedTopic:any = {};
@@ -31,20 +33,33 @@ export class DashboardComponent implements OnInit {
   viewedNote: any = {};
 
   constructor(private modalService: NgbModal,
-    private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private httpManager: HttpManager) {}
 
   ngOnInit() {
     this.init();
   }
 
   init() {
+    console.log("init");
+    console.log(localStorage.getItem('currentUser'))
+    console.log(environment.currentUser)
     this.getAllNotes();
     this.getAllTopics();
   }
 
   getAllNotes() {
+    this.httpManager.getNotesByUserId(environment.currentUser.userId).subscribe(
+      (res) => {
+        console.log(res);
+        this.notes = res.body;
+        this.cloneNotes();
+      }, (err) => {
+        console.log(err);
+      }
+    );
     // todo call service and get all notes
-    this.notes = [
+    /* this.notes = [
       {
         noteId: 1,
         topic: "topic 1",
@@ -69,8 +84,8 @@ export class DashboardComponent implements OnInit {
         topicId: 4,
         content: "Loose coupling / high cohesion"
       }
-    ];
-    this.cloneNotes();
+    ]; */
+    
   }
 
   cloneNotes() {
@@ -78,8 +93,16 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllTopics() {
+    this.httpManager.getTopicsByUserId("d1db8910-b3ec-4922-8776-1f18f94cd398").subscribe(
+      (res) => {
+        console.log(res);
+        this.topics = res.body;
+      }, (err) => {
+        console.log(err);
+      }
+    );
     // todo call service and get all topics
-    this.topics = [
+    /* this.topics = [
       {
         id: "1",
         topic: "topic 1"
@@ -96,7 +119,7 @@ export class DashboardComponent implements OnInit {
         id: "4",
         topic: "spring framework"
       }
-    ];
+    ]; */
   }
 
   open(content, note) {

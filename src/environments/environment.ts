@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_BASE_PATH: "http://localhost:8080/api"
+  API_BASE_PATH: "API",
+  currentUser: JSON.parse(localStorage.getItem('currentUser'))
 };
 
 /*

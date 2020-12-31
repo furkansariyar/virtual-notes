@@ -18,16 +18,23 @@
       </div>
       <div class="form-group padding-top-10">
         <label>Name Surname</label>
-        <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+        <input type="text" formControlName="fullName" class="form-control" pattern="^[a-zA-ZğüşöçİĞÜŞÖÇ]+$" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"/>
         <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
           <div *ngIf="f.fullName.errors.required">Name Surname is required</div>
+        </div>
+        <div *ngIf="submitted && f.fullName.value.length>0" class="invalid-feedback">
+          <div>You may only use letters</div>
         </div>
       </div>
       <div class="form-group padding-top-10">
         <label>Email</label>
-        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" />
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors.required">Email is required</div>
+        </div>
+        <div *ngIf="submitted && f.email.value.length>0" class="invalid-feedback">
+          <div>Please enter a valid email address</div>
         </div>
       </div>
       <div class="form-group padding-top-10">

@@ -46,11 +46,10 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if (data != false) {
+          if (data.status == "true") {
             this.router.navigate(['/login']);
           } else {
-            console.log(data)
-            this.error = "ERROR" // todo: register servisinden boolean donmicek, message donecek sekilde ayarla + burada direkt mesaji bas
+            this.error = data.response;
             this.loading = false;
           }
         },

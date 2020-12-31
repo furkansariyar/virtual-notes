@@ -58,34 +58,6 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    // todo call service and get all notes
-    /* this.notes = [
-      {
-        noteId: 1,
-        topic: "topic 1",
-        topicId: 1,
-        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
-      },
-      {
-        noteId: 2,
-        topic: "topic 2 topic 2 topic 2 topic 2 topic 2 topic 2 topic 2",
-        topicId: 2,
-        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
-      },
-      {
-        noteId: 3,
-        topic: "topic 3",
-        topicId: 3,
-        content: "Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum"
-      }, 
-      {
-        noteId: 4,
-        topic: "spring framework",
-        topicId: 4,
-        content: "Loose coupling / high cohesion"
-      }
-    ]; */
-    
   }
 
   cloneNotes() {
@@ -101,25 +73,6 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    // todo call service and get all topics
-    /* this.topics = [
-      {
-        id: "1",
-        topic: "topic 1"
-      },
-      {
-        id: "2",
-        topic: "topic 2 topic 2 topic 2 topic 2 topic 2 topic 2 topic 2"
-      },
-      {
-        id: "3",
-        topic: "topic 3"
-      },
-      {
-        id: "4",
-        topic: "spring framework"
-      }
-    ]; */
   }
 
   open(content, note) {

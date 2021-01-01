@@ -69,3 +69,8 @@
 .displayNote .noteTopic, .displayNote .noteContent {
     color: #1d1d28;
 }
+
+.no-text {
+    text-align: center;
+    font-size: larger;
+}

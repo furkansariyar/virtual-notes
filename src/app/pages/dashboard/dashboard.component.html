@@ -53,9 +53,11 @@
           </div>
         </div>
       </div>
-
       <div class="card-body" style="padding: 0 20px 15px;">
         <div class="row">
+          <div *ngIf="showedNotes.length == 0" class="col-sm-12">
+            <p class="text-danger no-text">You haven't saved any notes yet :(</p>
+          </div>
           <div class="col-sm-6" *ngFor="let note of showedNotes">
             <div class="card note-card" (click)="open(displayNote, note)">
               <div class="card-header">

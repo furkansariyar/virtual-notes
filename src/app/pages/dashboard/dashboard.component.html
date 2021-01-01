@@ -137,7 +137,7 @@
           Add new topic
         </button>
         <button class="btn-dropdown-item" ngbDropdownItem *ngFor="let topic of topics" (click)="selectTopic(topic)">
-          {{topic.topic}}
+          {{topic.topic_name}}
         </button>
       </div>
     </div>
@@ -187,14 +187,14 @@
       <div class="displayNote">
         <span class="title">Topic:&nbsp;</span>
         <span class="noteTopic">
-          {{viewedNote.topic}}
+          {{viewedNote.topic.topicName}}
         </span>
       </div>
   
       <div class="displayNote">
         <span class="title">Note:&nbsp;</span>
         <span class="noteContent">
-          {{viewedNote.content}}
+          {{viewedNote.note}}
         </span>
       </div>
     </div>

@@ -12,20 +12,38 @@ export class HttpManager {
 
     constructor(private http: HttpClient) { }
 
-    // TOPIC
+    // TOPIC *************************************************************************************
 
     getTopicsByUserId(userId): Observable<HttpResponse<any>> {
-        console.log("Get Topics by user id")
+        console.log("Get topics by user id")
         this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<any>(this.address+"/v1/topic/getAllTopicsByUserId/"+userId, { headers: this.headers, observe: 'response' }) 
     }
 
-    // NOTE
+    saveTopic(body): Observable<HttpResponse<any>> {
+        console.log("Save new topic")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<any>(this.address+"/v1/topic/saveTopic", body, { headers: this.headers, observe: 'response' }) 
+    }
+
+    deleteTopicById(topicId): Observable<HttpResponse<any>> {
+        console.log("Delete topic id")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.delete<any>(this.address+"/v1/topic/deleteTopicById/"+topicId, { headers: this.headers, observe: 'response' }) 
+    }
+
+    // NOTE *************************************************************************************
 
     getNotesByUserId(userId): Observable<HttpResponse<any>> {
-        console.log("Get Notes by user id")
+        console.log("Get notes by user id")
         this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.get<any>(this.address+"/v1/note/getNotesByUserId/"+userId, { headers: this.headers, observe: 'response' }) 
+    }
+
+    saveNote(body): Observable<HttpResponse<any>> {
+        console.log("Save new note")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<any>(this.address+"/v1/note/saveNote", body, { headers: this.headers, observe: 'response' }) 
     }
 
 }

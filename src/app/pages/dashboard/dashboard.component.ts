@@ -42,8 +42,7 @@ export class DashboardComponent implements OnInit {
 
   init() {
     console.log("init");
-    console.log(localStorage.getItem('currentUser'))
-    console.log(environment.currentUser)
+    console.log(environment.currentUser.token)
     this.getAllNotes();
     this.getAllTopics();
   }
@@ -51,8 +50,8 @@ export class DashboardComponent implements OnInit {
   getAllNotes() {
     this.httpManager.getNotesByUserId(environment.currentUser.userId).subscribe(
       (res) => {
-        console.log(res);
         this.notes = res.body;
+        console.log(this.notes);
         this.cloneNotes();
       }, (err) => {
         console.log(err);
@@ -65,10 +64,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllTopics() {
-    this.httpManager.getTopicsByUserId("d1db8910-b3ec-4922-8776-1f18f94cd398").subscribe(
+    this.httpManager.getTopicsByUserId(environment.currentUser.userId).subscribe(
       (res) => {
-        console.log(res);
         this.topics = res.body;
+        console.log(this.topics);
       }, (err) => {
         console.log(err);
       }
@@ -130,13 +129,19 @@ export class DashboardComponent implements OnInit {
         reject();
       } else {
         this.checkTopicIsOccur().then((res) => {
-          var id = this.topics.length+1; // todo id convert to the uuid
           var obj = {
-            id: id.toString(),
-            topic: this.newTopicName.trim()
+            topic_name: this.newTopicName.trim()
           };
-          this.selectedTopic = obj;
-          resolve();
+          this.httpManager.saveTopic(obj).subscribe(
+            (res) => {
+              console.log(res);
+              this.selectedTopic = res.body;
+              resolve(this.selectedTopic);
+            },
+            (err) => {
+              console.log("[ERROR] save topic service")
+            }
+          );
         }, (err) => {
           alert(err);
           reject();
@@ -149,38 +154,43 @@ export class DashboardComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.topics.forEach(element => {
         console.log(element)
-        if (element.topic === this.newTopicName.trim()) {
-          console.log("!!!!!!!!!!!!!!!!!!!!!!")
+        if (element.topic_name === this.newTopicName.trim()) {
+          console.log("[ERROR] This topic is already exist");
           reject("This topic is already exists");
         }
       });
-      resolve();
+      resolve("ok");
     });
   }
 
   newNote() {
     if (this.newNoteContent == undefined || this.newNoteContent.trim().length == 0) {
+      if (this.addTopicFlag) {
+        this.httpManager.deleteTopicById(this.selectedTopic.topic_id).subscribe(
+          (err) => {
+            // todo: event listener ekleyip buradan bu topic delete edilemedi seklinde event firlatilabilir
+          }
+        );
+      }
       alert("Please enter a valid note");
     } else {
       console.log("new note");
-      console.log(this.newNoteContent);
-      console.log(this.selectedTopic);
-      if (this.addTopicFlag) {
-        this.topics.push(this.selectedTopic); // todo topics servise post attiktan sonra return den gelsin
-        // todo call servis update topics
-      }
-      
       var newNote = {
-        noteId: this.showedNotes.length+1,
-        topic: this.selectedTopic.topic,
-        topicId: this.selectedTopic.id,
-        content: this.newNoteContent
+        user_id: environment.currentUser.userId,
+        topic_id: this.selectedTopic.topic_id,
+        note: this.newNoteContent
       };
-      // todo call service add new note
-      this.notes.push(newNote);
-      this.showedNotes.push(newNote);
-
-      this.showNotification('bottom', 'right', this.selectedTopic.topic, this.newNoteContent);
+      this.httpManager.saveNote(newNote).subscribe(
+        (res) => {
+          console.log(res);
+          this.getAllTopics();
+          this.getAllNotes();
+        }, 
+        (err) => {
+          console.log("[ERROR] save note service");
+        }
+      );
+      this.showNotification('bottom', 'right', this.selectedTopic.topic_name, this.newNoteContent);
     }
   }
 
@@ -205,11 +215,10 @@ export class DashboardComponent implements OnInit {
       console.log("all selected");
       this.cloneNotes();
     } else {
-      console.log(topic);
       var j = 0
       this.showedNotes = [];
       for(var i=0; i<this.notes.length; i++) {
-        if (this.notes[i].topicId == topic.id) {
+        if (this.notes[i].topic.topicId == topic.topic_id) {
           this.showedNotes[j] = JSON.parse(JSON.stringify(this.notes[i]));
           j++;
         }

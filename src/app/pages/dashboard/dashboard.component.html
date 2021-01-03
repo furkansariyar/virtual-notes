@@ -72,7 +72,8 @@
                       class=" btn btn-link"
                       data-target="#searchModal"
                       data-toggle="modal"
-                      (click)="open(search)"
+                      onclick="event.stopPropagation();"
+                      (click)="open(editNote, note)"
                       id="search-button"
                       style="font-size: larger; margin-top: -8px; margin-right: 5px"
                     >
@@ -155,7 +156,7 @@
     />
 
     <span *ngIf="!addTopicFlag" style="width: 100%; padding: 15px 20px;">
-      {{selectedTopic.topic}}
+      {{selectedTopic.topic_name}}
     </span>
 
     <button
@@ -207,6 +208,55 @@
       data-dismiss="modal"
       type="button"
       (click)="modal.dismiss('displayNote')"
+    >
+      <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #editNote let-modal>
+  <div class=" modal-header">
+
+    <div style="width: 96%">
+      <div class="editNote">
+        <span class="title">Topic:&nbsp;</span>
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary btn-dropdown selectTopicBtn" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="btn-dropdown-item" ngbDropdownItem *ngFor="let topic of topics" (click)="selectTopicForEdit(topic)">
+              {{topic.topic_name}}
+            </button>
+          </div>
+        </div>
+        <input
+          (click)="deselectTopicForEdit()"
+          class=" form-control"
+          style="padding-right: 30px; padding-bottom: 11px;"
+          id="topic"
+          placeholder={{editTopicNewValue}}
+          type="text"
+          [(ngModel)]="editTopicNewValue"
+        />
+      </div>
+      <div class="editNote">
+        <span class="title">Note:&nbsp;</span>
+        <input
+          class=" form-control"
+          style="padding-right: 30px; padding-bottom: 11px;"
+          id="topic"
+          placeholder={{editNoteNewValue}}
+          type="text"
+          [(ngModel)]="editNoteNewValue"
+        />
+      </div>
+    </div>
+    
+    <button
+      aria-label="Close"
+      class=" close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('edit-note')"
     >
       <i class=" tim-icons icon-simple-remove"> </i>
     </button>

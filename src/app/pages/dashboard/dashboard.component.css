@@ -55,19 +55,29 @@
     }
 }
 
-.displayNote {
+.displayNote, .editNote {
     width: 100%;
     padding: 10px 0;
     line-height: 24px;
 }
 
-.displayNote .title {
+.displayNote .title, .editNote .title {
     font-weight: bold; 
     color: #e6322f;
 }
 
 .displayNote .noteTopic, .displayNote .noteContent {
     color: #1d1d28;
+}
+
+.editNote {
+    display: inline-flex;
+}
+
+.editNote .selectTopicBtn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 5px !important;
 }
 
 .no-text {

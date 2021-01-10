@@ -7,7 +7,7 @@
 
 .topic-abbreviation:hover {
     overflow: visible;
-    background: #27293d;
+    /* background: #27293d; */
     width: max-content;
 }
 
@@ -83,4 +83,39 @@
 .no-text {
     text-align: center;
     font-size: larger;
+}
+
+.editBtn {
+    width: fit-content !important;
+    right: unset !important;
+    top: unset !important;
+    margin: auto;
+}
+
+.template-header {
+    color: #fcaf58;
+    font-weight: bolder;
+    letter-spacing: 1px;
+
+    background: linear-gradient(to right, #fcaf58 0%, #d81e5b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.editTopicName {
+    padding-left: 10px; 
+    color: var(--light);
+}
+
+.editTopicName:hover {
+    cursor: pointer;
+}
+
+.editTopicName button {
+    color: var(--light); 
+    padding-top: 2px;
+}
+
+.editTopicName button:hover {
+    color: var(--light) !important; 
 }

@@ -34,6 +34,11 @@ export class DashboardComponent implements OnInit {
   viewedNote: any = {};
   editNoteNewValue: string = null;
   editTopicNewValue: string = null;
+  editTopicNameNewValue: string = null;
+  isSearchedResult:boolean = false;
+  cardHeader:string = "My Notes";
+  filteredTopic:any;
+  editTopicNameFlag:boolean = false;
 
   constructor(private modalService: NgbModal,
               private toastr: ToastrService,
@@ -84,7 +89,9 @@ export class DashboardComponent implements OnInit {
       this.viewedNote = note;
       this.editTopicNewValue = note.topic.topicName;
       this.editNoteNewValue = note.note;
-    }
+    } /* else if(content._declarationTContainer.localNames[0] === "editTopicName") {
+      this.editTopicName();
+    } */
     this.modalService.open(content, {windowClass: 'modal-search'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -102,8 +109,12 @@ export class DashboardComponent implements OnInit {
         this.addNote();
       } else if (reason == "search") {
         this.search();
+      } else if (reason == "delete-note") {
+        this.deleteNote();
       } else if (reason == "edit-note") {
         this.editNote();
+      } else if (reason == "edit-topic") {
+        this.editTopicName();
       }
       return  `with: ${reason}`;
     }
@@ -360,16 +371,32 @@ export class DashboardComponent implements OnInit {
   }
 
   search() {
-    console.log(this.searchedValue);
-    // todo call search service
+    if (this.searchedValue == undefined || this.searchedValue.trim().length == 0) {
+      alert("Please enter a valid text");
+    } else {
+      this.httpManager.searchNotes(environment.currentUser.userId, this.searchedValue).subscribe(
+        (res) => {
+          this.showedNotes = res.body;
+          this.isSearchedResult = true;
+        }, (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   filterTopic(topic) {
+    this.isSearchedResult = false;
+    this.filteredTopic = topic;
+    this.editTopicNameNewValue = topic.topic_name;
     // todo bunu servisten alacak sekilde de duzenleyebilirim ??? servisten alacak sekilde duzenle
     if (topic == undefined) {
-      console.log("all selected");
+      this.cardHeader = "My Notes";
+      this.editTopicNameFlag = false;
       this.cloneNotes();
     } else {
+      this.editTopicNameFlag = true;
+      this.cardHeader = topic.topic_name;
       var j = 0
       this.showedNotes = [];
       for(var i=0; i<this.notes.length; i++) {
@@ -379,7 +406,28 @@ export class DashboardComponent implements OnInit {
         }
       }
     }
-    console.log(this.showedNotes)
+  }
+
+  editTopicName() {
+    console.log(this.filteredTopic);
+    console.log(this.editTopicNameNewValue);
+    if (this.editTopicNameNewValue == undefined || this.editTopicNameNewValue.trim().length == 0) {
+      alert("Please enter a valid topic name");
+    } 
+    // todo: error check - bu userin notlarindaki topiclerden birisinin adini giremez
+    // tum topicler arasinda boyle bi topic varsa o topic id ye dokunulmamasi lazim
+    // yeni topic olusturulmali ve baglantili tum notlar bu yeni olusturulan topicle bagdastirilmali
+  }
+
+  deleteNote() {
+    this.httpManager.deleteNoteById(this.viewedNote.id).subscribe(
+      (res) => {
+        this.getAllNotesByUser();
+        this.getAllTopicsByUser();
+      }, (err) => {
+        console.log("[ERROR] delete note service");
+      }
+    );
   }
   
 }

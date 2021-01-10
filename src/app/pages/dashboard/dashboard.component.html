@@ -21,7 +21,19 @@
       <div class="card-header">
         <div class="row justify-content-between">
           <div class=" col-xs-9 text-left" style="padding-left: 20px;">
-            <h2 class=" card-title">My Notes</h2>
+            <h2 *ngIf="!isSearchedResult" class="card-title" style="display: inline-flex;">{{cardHeader}}</h2>
+            <h2 *ngIf="isSearchedResult" class="card-title">My Notes - Search Result</h2>
+            <span *ngIf="!isSearchedResult && editTopicNameFlag" class="editTopicName" (click)="open(editTopicName)">
+              <small>EDIT TOPIC NAME</small>
+              <button
+                class=" btn btn-link"
+                data-target="#searchModal"
+                data-toggle="modal"
+                id="search-button"
+              >
+                <i class=" tim-icons icon-pencil"> </i>
+              </button>
+            </span>
           </div>
           <div class=" col-xs-3" style="padding-right: 15px;">
             <div style="float: right">
@@ -102,7 +114,8 @@
       class=" form-control"
       id="inlineFormInputGroup"
       placeholder="SEARCH"
-      type="text"
+      type="search"
+      (change) = "modal.dismiss('search')"
       [(ngModel)]="searchedValue"
       style="padding-right: 65px;"
     />
@@ -131,12 +144,14 @@
 </ng-template>
 
 <ng-template #addNote let-modal>
-  <div class=" modal-header">
-    
+  <div class=" modal-header" style="padding-bottom: 0;">
+    <h1 class="text-dark template-header">ADD NOTE</h1>
+  </div>
+  <div class=" modal-header" style="padding-top: 14px;">
     <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary btn-dropdown" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
+      <button class="btn btn-simple btn-outline-primary btn-dropdown" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="btn-dropdown-item" ngbDropdownItem (click)="convertTopicFlag()">
+        <button class="btn-dropdown-item text-primary" ngbDropdownItem (click)="convertTopicFlag()">
           Add new topic
         </button>
         <button class="btn-dropdown-item" ngbDropdownItem *ngFor="let topic of topics" (click)="selectTopic(topic)">
@@ -144,7 +159,6 @@
         </button>
       </div>
     </div>
-
     <input
       *ngIf="addTopicFlag"
       class=" form-control"
@@ -154,22 +168,19 @@
       type="text"
       [(ngModel)]="newTopicName"
     />
-
     <span *ngIf="!addTopicFlag" style="width: 100%; padding: 15px 20px;">
       {{selectedTopic.topic_name}}
     </span>
-
     <button
       aria-label="Close"
       class=" close"
       data-dismiss="modal"
       type="button"
-      (click)="modal.dismiss('save-note')"
+      (click)="modal.dismiss('dismiss')"
     >
-      <i class=" tim-icons icon-check-2" style="color: green; font-weight: bolder;"> </i>
+      <i class=" tim-icons icon-simple-remove"> </i>
     </button>
   </div>
-
   <div class=" modal-header" style="padding-top: 0;">
     <input
       class=" form-control"
@@ -179,13 +190,22 @@
       type="text"
       [(ngModel)]="newNoteContent"
     />
-    
+  </div>
+  <div class="modal-body" style="padding-top: 0%;">
+    <button
+      class=" btn btn-danger btn-block"
+      (click)="modal.dismiss('save-note')"
+    >
+      Add Note
+    </button>
   </div>
 </ng-template>
 
 <ng-template #displayNote let-modal>
-  <div class=" modal-header">
-
+  <div class=" modal-header" style="padding-bottom: 0;">
+    <h1 class="text-dark template-header">VIEW NOTE</h1>
+  </div>
+  <div class=" modal-header" style="padding-top: 14px;">
     <div style="width: 96%">
       <div class="displayNote">
         <span class="title">Topic:&nbsp;</span>
@@ -193,7 +213,6 @@
           {{viewedNote.topic.topicName}}
         </span>
       </div>
-  
       <div class="displayNote">
         <span class="title">Note:&nbsp;</span>
         <span class="noteContent">
@@ -201,7 +220,6 @@
         </span>
       </div>
     </div>
-    
     <button
       aria-label="Close"
       class=" close"
@@ -215,13 +233,15 @@
 </ng-template>
 
 <ng-template #editNote let-modal>
-  <div class=" modal-header">
-
+  <div class=" modal-header" style="padding-bottom: 0;">
+    <h1 class="text-dark template-header">EDIT NOTE</h1>
+  </div>
+  <div class=" modal-header" style="padding-top: 14px;">
     <div style="width: 96%">
       <div class="editNote">
         <span class="title">Topic:&nbsp;</span>
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary btn-dropdown selectTopicBtn" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
+          <button class="btn btn-simple btn-outline-primary btn-dropdown selectTopicBtn" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button class="btn-dropdown-item" ngbDropdownItem *ngFor="let topic of topics" (click)="selectTopicForEdit(topic)">
               {{topic.topic_name}}
@@ -250,15 +270,88 @@
         />
       </div>
     </div>
-    
     <button
       aria-label="Close"
       class=" close"
       data-dismiss="modal"
       type="button"
-      (click)="modal.dismiss('edit-note')"
+      (click)="modal.dismiss('dismiss')"
     >
       <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
+  </div>
+  <div class="modal-body" style="padding-top: 0%;">
+    <button
+      style="float: left;"
+      class=" btn btn-dark btn-block editBtn"
+      (click)="modal.dismiss('edit-note')"
+    >
+      Edit Note
+    </button>
+    <button
+      style="float: right;"
+      class=" btn btn-danger btn-block editBtn"
+      (click)="modal.dismiss('delete-note')"
+    >
+      Delete Note
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #editTopicName let-modal>
+  <div class=" modal-header" style="padding-bottom: 0;">
+    <h1 class="text-dark template-header">EDIT TOPIC</h1>
+  </div>
+  <div class=" modal-header" style="padding-top: 14px;">
+    <div style="width: 96%">
+      <div class="editNote">
+        <span class="title">Topic:&nbsp;</span>
+        <!-- <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-simple btn-outline-primary btn-dropdown selectTopicBtn" id="dropdownBasic1" ngbDropdownToggle>Select Topic</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="btn-dropdown-item" ngbDropdownItem *ngFor="let topic of topics" (click)="selectTopicForEdit(topic)">
+              {{topic.topic_name}}
+            </button>
+          </div>
+        </div> -->
+        <input
+          class=" form-control"
+          style="padding-right: 30px; padding-bottom: 11px;"
+          id="topic"
+          placeholder={{editTopicNameNewValue}}
+          type="text"
+          [(ngModel)]="editTopicNameNewValue"
+        />
+      </div>
+      <!-- <div class="editNote">
+        <span class="title">Note:&nbsp;</span>
+        <input
+          class=" form-control"
+          style="padding-right: 30px; padding-bottom: 11px;"
+          id="topic"
+          placeholder={{editNoteNewValue}}
+          type="text"
+          [(ngModel)]="editNoteNewValue"
+        />
+      </div> -->
+    </div>
+    <button
+      aria-label="Close"
+      class=" close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('dismiss')"
+    >
+      <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
+  </div>
+  <div class="modal-body" style="padding-top: 0%;">
+    <button
+      style="float: left;"
+      class=" btn btn-dark btn-block editBtn"
+      (click)="modal.dismiss('edit-topic')"
+    >
+      Edit Topic
     </button>
   </div>
 </ng-template>

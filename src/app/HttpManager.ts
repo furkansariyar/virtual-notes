@@ -64,4 +64,16 @@ export class HttpManager {
         return this.http.put<any>(this.address+"/v1/note/updateNoteById/"+noteId, body, { headers: this.headers, observe: 'response' }) 
     }
 
+    deleteNoteById(noteId): Observable<HttpResponse<any>> {
+        console.log("Delete note by note id")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.delete<any>(this.address+"/v1/note/deleteNoteById/"+noteId, { headers: this.headers, observe: 'response' }) 
+    }
+
+    searchNotes(userId, searchedText): Observable<HttpResponse<any>> {
+        console.log("Search notes")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.get<any>(this.address+"/v1/note/searchNotes/"+userId+"/"+searchedText, { headers: this.headers, observe: 'response' }) 
+    }
+
 }

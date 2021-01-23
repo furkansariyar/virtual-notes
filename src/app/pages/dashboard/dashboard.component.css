@@ -119,3 +119,7 @@
 .editTopicName button:hover {
     color: var(--light) !important; 
 }
+
+.sidebar-topic:hover {
+    cursor: pointer !important;
+}

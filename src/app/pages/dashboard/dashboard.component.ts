@@ -388,13 +388,12 @@ export class DashboardComponent implements OnInit {
   filterTopic(topic) {
     this.isSearchedResult = false;
     this.filteredTopic = topic;
-    this.editTopicNameNewValue = topic.topic_name;
-    // todo bunu servisten alacak sekilde de duzenleyebilirim ??? servisten alacak sekilde duzenle
     if (topic == undefined) {
       this.cardHeader = "My Notes";
       this.editTopicNameFlag = false;
       this.cloneNotes();
     } else {
+      this.editTopicNameNewValue = topic.topic_name;
       this.editTopicNameFlag = true;
       this.cardHeader = topic.topic_name;
       var j = 0
@@ -413,10 +412,65 @@ export class DashboardComponent implements OnInit {
     console.log(this.editTopicNameNewValue);
     if (this.editTopicNameNewValue == undefined || this.editTopicNameNewValue.trim().length == 0) {
       alert("Please enter a valid topic name");
-    } 
-    // todo: error check - bu userin notlarindaki topiclerden birisinin adini giremez
-    // tum topicler arasinda boyle bi topic varsa o topic id ye dokunulmamasi lazim
-    // yeni topic olusturulmali ve baglantili tum notlar bu yeni olusturulan topicle bagdastirilmali
+    }
+    this.checkTopicIsUsed(this.editTopicNameNewValue).then(
+      (notUsed) => {
+        // topic does not used by the user
+        this.checkTopicIsOccur(this.editTopicNameNewValue).then(
+          (existedId) => {
+            // topic is occur in db but does not used by the user
+            this.updateTopic(existedId);
+          }, (notExist) => {
+            // new topic is generated and the notes are updated with id of the new generated topic 
+            var obj = {
+              topic_name: this.editTopicNameNewValue.trim()
+            };
+            this.httpManager.saveTopic(obj).subscribe(
+              (res) => {
+                console.log(res);
+                this.updateTopic(res.body.topic_id);
+              },
+              (err) => {
+                console.log("[ERROR] save topic service")
+              }
+            );
+          }
+        );
+      }, (usedId) => {
+        // topic is used by the user
+        console.log(usedId);
+        this.updateTopic(usedId);
+      }
+    );
+  }
+
+  updateTopic(id) {
+    this.updateTopicId(id).then((updateNoteList) => {
+      console.log(updateNoteList)
+      this.httpManager.bulkUpdateNote(updateNoteList).subscribe(
+        (res) => {
+          window.location.reload(); // Reload the page
+        }, (err) => {
+          console.log("[ERROR] Bulk Note Update service error");
+        }
+      );
+    });
+  }
+
+  updateTopicId(id) {
+    return new Promise((resolve) => {
+      var updateNoteList = [];
+      this.notes.forEach(note => {
+        if (note.topic.topicId == this.filteredTopic.topic_id) {
+          var updateNoteObj = {
+            note_id: note.id,
+            topic_id: id
+          };
+          updateNoteList.push(updateNoteObj);
+        }
+      });
+      resolve(updateNoteList);
+    });
   }
 
   deleteNote() {

@@ -1,17 +1,17 @@
 <div class="content">
   <div class="row">
-    <div class="sidebar dash-side-collapse">
+    <div class="sidebar dash-side-collapse" style="overflow-y: auto; overflow-x: hidden;">
       <ul class="nav">
-        <li class="nav-item">
-          <a style="text-transform: none; cursor: initial; padding: 0 8px; font-size: larger;" (click)="filterTopic()">
+        <li class="nav-item sidebar-topic">
+          <a style="text-transform: none; padding: 0 8px; font-size: larger;" (click)="filterTopic()">
             <p class="topic-abbreviation">All Notes</p>
           </a>
         </li>
         <li
           *ngFor="let item of topics"
-          class="nav-item"
+          class="nav-item sidebar-topic"
         >
-          <a style="text-transform: none; cursor: initial; padding: 0 8px; font-size: larger;" (click)="filterTopic(item)">
+          <a style="text-transform: none; padding: 0 8px; font-size: larger;" (click)="filterTopic(item)">
             <p class="topic-abbreviation">{{ item.topic_name }}</p>
           </a>
         </li>

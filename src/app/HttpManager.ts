@@ -64,6 +64,12 @@ export class HttpManager {
         return this.http.put<any>(this.address+"/v1/note/updateNoteById/"+noteId, body, { headers: this.headers, observe: 'response' }) 
     }
 
+    bulkUpdateNote(body): Observable<HttpResponse<any>> {
+        console.log("Bulk update notes")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.put<any>(this.address+"/v1/note/bulkUpdateNote", body, { headers: this.headers, observe: 'response' }) 
+    }
+
     deleteNoteById(noteId): Observable<HttpResponse<any>> {
         console.log("Delete note by note id")
         this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });

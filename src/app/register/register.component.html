@@ -18,7 +18,7 @@
       </div>
       <div class="form-group padding-top-10">
         <label>Name Surname</label>
-        <input type="text" formControlName="fullName" class="form-control" pattern="^[a-zA-ZğüşöçİĞÜŞÖÇ]+$" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"/>
+        <input type="text" formControlName="fullName" class="form-control" pattern="^[a-zA-ZğüşöçİĞÜŞÖÇ\s]+$" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"/>
         <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
           <div *ngIf="f.fullName.errors.required">Name Surname is required</div>
         </div>

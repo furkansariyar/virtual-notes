@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {
     path: "**",
-    redirectTo: "dashboard" //todo: not found component eklenecek
+    redirectTo: "dashboard" // 404 page eklenmek istenirse buraya eklenmeli
   }
 ];
 

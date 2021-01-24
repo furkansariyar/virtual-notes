@@ -253,7 +253,7 @@ export class DashboardComponent implements OnInit {
       } else {
         this.checkTopicIsUsed(this.newTopicName).then((res) => {
           this.checkTopicIsOccur(this.newTopicName).then(
-            (id) => { // means this topic is not used by the user but it exists in db
+            (id) => { // means this topic does not used by the user but it exists in db
               this.httpManager.getTopicById(id).subscribe(
                 (res) => {
                   this.selectedTopic = res.body;
@@ -262,7 +262,7 @@ export class DashboardComponent implements OnInit {
                   console.log("[ERROR] Get topic by Id")
                 }
               );
-            }, (err) => { // means this topic does not exist in db
+            }, (err) => { // means this topic does not exist in db and it is generating here
               var obj = {
                 topic_name: this.newTopicName.trim()
               };
@@ -278,9 +278,16 @@ export class DashboardComponent implements OnInit {
               );
             }
           );
-        }, (err) => {
-          alert(err);
-          reject();
+        }, (usedId) => { // means this topic is used by the user
+          this.httpManager.getTopicById(usedId).subscribe(
+            (res) => {
+              this.selectedTopic = res.body;
+              resolve(this.selectedTopic);
+            }, (err) => {
+              console.log("[ERROR] Get topic by Id");
+              reject();
+            }
+          );
         });
       }
     });

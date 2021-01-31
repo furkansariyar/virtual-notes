@@ -11,11 +11,11 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  private listTitles: any[];
+  listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
-  private toggleButton: any;
-  private sidebarVisible: boolean;
+  toggleButton: any;
+  sidebarVisible: boolean;
   username:string = null;
 
   public isCollapsed = true;

@@ -82,16 +82,14 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  open(content, note) {
+  open(content, note=undefined) {
     if (content._declarationTContainer.localNames[0] === "displayNote") {
       this.viewedNote = note;
     } else if(content._declarationTContainer.localNames[0] === "editNote") {
       this.viewedNote = note;
       this.editTopicNewValue = note.topic.topicName;
       this.editNoteNewValue = note.note;
-    } /* else if(content._declarationTContainer.localNames[0] === "editTopicName") {
-      this.editTopicName();
-    } */
+    }
     this.modalService.open(content, {windowClass: 'modal-search'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -392,7 +390,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  filterTopic(topic) {
+  filterTopic(topic=undefined) {
     this.isSearchedResult = false;
     this.filteredTopic = topic;
     if (topic == undefined) {

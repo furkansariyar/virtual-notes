@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_BASE_PATH: "API",
+  API_BASE_PATH: "http://api.virtualnotes.sudoers.co/api",
   currentUser: JSON.parse(localStorage.getItem('currentUser'))
 };
 

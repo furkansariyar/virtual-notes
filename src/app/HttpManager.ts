@@ -12,6 +12,14 @@ export class HttpManager {
 
     constructor(private http: HttpClient) { }
 
+    // USER **************************************************************************************
+    
+    exportNotesByUserId(userId): Observable<Blob> {
+        console.log("Export notes by user id")
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/vnd.ms-excel', responseType: 'blob' });      
+        return this.http.get<any>(this.address+"/v1/user/exportNotesByUserId/"+userId, { headers: this.headers, responseType: 'blob' as 'json' })
+    }
+
     // TOPIC *************************************************************************************
     
     getAllTopics(): Observable<HttpResponse<any>> {

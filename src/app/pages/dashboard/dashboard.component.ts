@@ -488,5 +488,20 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  exportNotes() {
+    this.httpManager.exportNotesByUserId(environment.currentUser.userId).subscribe(
+      (res) => {
+        var blob = new Blob([(<any>res)._body], { type: "application/vnd.ms-excel" });
+        var downloadURL = window.URL.createObjectURL(res);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "VirtualNotes.xlsx";
+        link.click();
+      }, (err) => {
+        console.log("[ERROR] export notes service " + err);
+      }
+    )
+  }
   
 }

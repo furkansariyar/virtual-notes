@@ -43,6 +43,17 @@
                     class=" btn btn-link"
                     data-target="#searchModal"
                     data-toggle="modal"
+                    (click)="exportNotes()"
+                    id="search-button"
+                  >
+                    <i class=" tim-icons icon-cloud-download-93"> </i>
+                  </button>
+                </li>
+                <li class=" search-bar input-group" style="margin-left: 0;">
+                  <button
+                    class=" btn btn-link"
+                    data-target="#searchModal"
+                    data-toggle="modal"
                     (click)="open(search)"
                     id="search-button"
                   >
